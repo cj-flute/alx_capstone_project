@@ -1,0 +1,117 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-align: center;
+    gap: 5px;
+    margin-top: var(--margin-top);
+}
+:root {
+    --big-width: 100%;
+    --big-height: 100%;
+    --medium-width: 70%;
+    --medium-height: 70%;
+    --very-small-width: 10%;
+    --small-width: 20%;
+    --very-small-height: 10%;
+    --small-height: 20%;
+    --margin-left: 15%;
+    --margin-right: 15%;
+    --margin-top: 5px;
+    --test-border-1: 1px solid black;
+    --test-border-2: 1px solid red;
+    --very-small-percent: 5%;
+    --small-percent: 20%;
+    --average-percent: 50%;
+    --big-percent: 70%;
+    --very-big-percent: 90%;
+    --color-1: rgba(243, 192, 96, 0.501);
+    --color-2: rgba(255, 255, 255, 0.834);
+    --color-3: rgba(50, 164, 164, 0.497);
+
+}
+
+.ledger {
+    display: flex;
+    justify-content: space-around;
+    width: var(--medium-width);
+    margin-left: var(--margin-left);
+}
+.ledger div {
+    display: flex;
+    justify-content: space-evenly;
+    width: var(--small-width);
+}
+.expense-div,
+.income-div {
+    width: var(--medium-width);
+    display: flex;
+    margin-left: var(--margin-left);
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+.ex-div,
+.in-div {
+    display: flex;
+    height: var(--small-height);
+    width: var(--medium-width);
+    margin-left: var(--margin-left);
+    justify-content: center;
+}
+
+.expense-budget-div,
+.income-budget-div {
+    background-color: var(--color-1);
+    width: var(--big-width);
+    padding: 5px;
+    border-radius: 5px;
+}
+.card {
+    width: 130px;
+    height: 170px;
+    border-radius: var(--very-small-percent);
+    background-color: var(--color-2);
+}
+.currency,
+.card img {
+    margin-top: 25px;
+}
+.card-btn-div {
+    display: flex;
+    justify-content: space-evenly;
+}
+.card-btn-div button {
+    height: 50px;
+    width: 50px;
+    border-radius: 35%;
+    border: none;
+    font-size: 50px;
+    color: orange;
+    background-color: white;
+}
+.card-btn-div button:hover {
+    color: var(--color-3);
+}
+.card-btn-div button:active {
+    color: var(--color-2);
+}
+.nav-div {
+    width: var(--medium-width);
+    margin-left: var(--margin-left);
+    display: flex;
+    justify-content: space-evenly;
+}
+.nav-div button {
+    background-color: var(--color-1);
+    width: var(--very-small-width);
+    height: 30px;
+    border-radius: 5px;
+    font-size: large;
+    border: none;
+}
+.nav-div button:hover {
+    background-color: var(--color-3);
+}
+.nav-div button:active {
+    background-color: var(--color-2);
+}
