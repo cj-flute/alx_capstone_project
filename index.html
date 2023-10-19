@@ -7,22 +7,42 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
-    <div class="modoal-div">
-
+    <!-- modal-div -->
+    <div class="modal-div">
+        <div class="modal">
+            <label><h2>Name of Ledger</h2></label><br>
+            <input type="text" id="input-ledger-name" style="border: none;" placeholder="USER"><br>
+            <button>OK</button>
+        </div>
+        <div class="cancel">❌</div>
     </div>
+
+    <!-- add-div -->
+    <div class="add-div">
+        <div class="add">
+            <input type="text" placeholder="Budget Name" id="budget-name"><br>
+            <input type="number" placeholder="Amount" id="budget-amount"><br>
+            <button id="add-btn">OK</button>
+            <div class="cancel" id="ex-cancel">❌</div>
+        </div>
+    </div>
+
+    <!-- main index -->
     <main>
         <h1>Budget Tracker App</h1>
         <div id="app-div">
             <div class="ledger">
                 <div>
-                    <label><h2>Name of Ledger</h2</label>
-                </div>
+                    <label for="name of leger"><h2 id="ledger-name">Name of Ledger</h2</label>
+                    </div>
                 <div>
-                    <label><h2>Month</h2></label>
+                    <label for="month"><h2>Month</h2></label>
                     <input type="month" id="month" name="month" style="border: none;">
                 </div>
                 
             </div>
+
+            <!-- Expense div -->
             <div class="expense-div">
                 <div class="ex-div">
                     <h2>Expense:</h2>
@@ -40,12 +60,12 @@
                         </div>
                     </div>
                     <div class="card-btn-div">
-                        <button>-</button>
-                        <button>+</button>
+                        <button class="btn">-</button>
+                        <button class="btn">+</button>
                     </div>
                 </div>
             </div>
-
+            Income
             <div class="income-div">
                 <div class="in-div">
                     <h2>Income:</h2>
@@ -56,15 +76,15 @@
                         <div class="card">
                             <h3>Budget Name</h3>
                             <img src="/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
-                                style="width: 50px; height: 50px; border-radius: 50px;">
+                            style="width: 50px; height: 50px; border-radius: 50px;">
                             <div class="currency">
                                 <p><span>$</span> 0</p>
                             </div>
                         </div>
                     </div>
                     <div class="card-btn-div">
-                        <button>-</button>
-                        <button>+</button>
+                        <button class="btn">-</button>
+                        <button class="btn">+</button>
                     </div>
                 </div>
             </div>
@@ -78,6 +98,6 @@
         </div>
     </main>
 
-    <script src="/js/app.js"></script>
+    <script type="module" src="/js/app.js"></script>
 </body>
 </html>
