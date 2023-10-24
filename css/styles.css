@@ -137,18 +137,27 @@ main {
     justify-content: space-evenly;
     margin-top: var(--very-small-percent);
 }
-.nav-div button {
-    background-color: var(--color-1);
-    width: var(--very-small-width);
-    height: 30px;
-    border-radius: 5px;
-    font-size: large;
-    border: none;
+nav {
+    width: var(--medium-width);
 }
-.nav-div button:hover {
+.links {
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.links a {
+    text-decoration: none;
+    color: black;
+    background-color: var(--color-1);
+    font-size: 30px;
+    border-radius: 5px;
+}
+
+.links a:hover {
     background-color: var(--color-3);
 }
-.nav-div button:active {
+.links a:active {
     background-color: var(--color-2);
 }
 
