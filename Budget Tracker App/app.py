@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-from flask import Flask
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
 
 @app.route('/')
 def hello():
-    return 'Budget Tracker App Server running!'
+    return render_template('index.html')
 
 
 

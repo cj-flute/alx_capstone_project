@@ -68,7 +68,7 @@ const createExpenseCard = (expenseData) => {
     const imgTag = document.createElement("img");
     imgTag.setAttribute(
         "src",
-        "/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
+        "/static/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
     );
     imgTag.setAttribute("style", "width: 50px");
     imgTag.setAttribute("style", "height: 50px");
@@ -142,7 +142,7 @@ const createIncomeCard = (incomeData) => {
     const imgTag = document.createElement("img");
     imgTag.setAttribute(
         "src",
-        "/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
+        "/static/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
     );
     imgTag.setAttribute("style", "width: 50px");
     imgTag.setAttribute("style", "height: 50px");
