@@ -100,6 +100,7 @@ const createExpenseCard = (expenseData) => {
 
 // ################################
 // ################################
+
 // For Income
 const income = []; // Array that holds the whole income
 
@@ -173,8 +174,6 @@ const createIncomeCard = (incomeData) => {
 
 // #################################
 // #################################
-
-
 
 // The cancel button to pop ups
 const exCancel = document.querySelector("#ex-cancel");

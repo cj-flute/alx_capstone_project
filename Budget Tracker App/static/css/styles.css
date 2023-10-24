@@ -150,7 +150,7 @@ nav {
     text-decoration: none;
     color: black;
     background-color: var(--color-1);
-    font-size: 30px;
+    font-size: 150%;
     border-radius: 5px;
 }
 
