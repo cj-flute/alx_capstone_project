@@ -31,7 +31,9 @@
 
 }
 
-body {position: relative;}
+body {
+    position: relative;
+}
 
 .modal-div {
     position: absolute;
@@ -50,7 +52,10 @@ body {position: relative;}
     right: 0;
 }
 
-main {margin-top: var(--margin-top);}
+main {
+    margin-top: var(--margin-top);
+    height: 1000px;
+}
 .ledger {
     display: flex;
     justify-content: space-around;
@@ -77,6 +82,8 @@ main {margin-top: var(--margin-top);}
     width: var(--medium-width);
     margin-left: var(--margin-left);
     justify-content: center;
+    /* border: var(--test-border-1); */
+    margin-top: 20px;
 }
 
 .expense-budget-div,
@@ -85,6 +92,14 @@ main {margin-top: var(--margin-top);}
     width: var(--big-width);
     padding: 5px;
     border-radius: 5px;
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.ex-top, .in-top {
+    display: flex;
+    /* border: var(--test-border-1); */
+    /* justify-content: center; */
 }
 .card {
     width: 130px;
@@ -96,10 +111,7 @@ main {margin-top: var(--margin-top);}
 .card img {
     margin-top: 25px;
 }
-.card-btn-div {
-    display: flex;
-    justify-content: space-evenly;
-}
+
 .card-btn-div button {
     height: 50px;
     width: 50px;
@@ -115,6 +127,9 @@ main {margin-top: var(--margin-top);}
 .card-btn-div button:active {
     color: var(--color-2);
 }
+/* .remove {
+    position: absolute;
+} */
 .nav-div {
     width: var(--medium-width);
     margin-left: var(--margin-left);

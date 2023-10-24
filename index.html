@@ -17,13 +17,24 @@
         <div class="cancel">❌</div>
     </div>
 
-    <!-- add-div -->
-    <div class="add-div">
+    <!-- Expense-add-div -->
+    <div class="add-div" id="expense-add-div">
         <div class="add">
+            <h2>Expense</h2>
             <input type="text" placeholder="Budget Name" id="budget-name"><br>
             <input type="number" placeholder="Amount" id="budget-amount"><br>
-            <button id="add-btn">OK</button>
+            <button class="add-btn" id="ex-add-btn">OK</button>
             <div class="cancel" id="ex-cancel">❌</div>
+        </div>
+    </div>
+    <!-- Income-add-div -->
+    <div class="add-div" id="income-add-div">
+        <div class="add">
+            <h2>Income</h2>
+            <input type="text" placeholder="Income Name" id="income-name"><br>
+            <input type="number" placeholder="Amount" id="income-amount"><br>
+            <button class="add-btn" id="in-add-btn">OK</button>
+            <div class="cancel" id="in-cancel">❌</div>
         </div>
     </div>
 
@@ -44,57 +55,74 @@
 
             <!-- Expense div -->
             <div class="expense-div">
-                <div class="ex-div">
-                    <h2>Expense:</h2>
-                    <h2><span>$</span> 0</h2>
+                <div class="ex-top">
+                    <div class="card-btn-div">
+                        <!-- <button class="btn">-</button> -->
+                        <button class="btn" id="ex-ok-btn">+</button>
+                    </div>
+                    <div class="ex-div">
+                        <h2>Expense:</h2>
+                        <h2><span>$</span><span id="total-ex">0</span></h2>
+                    </div>
                 </div>
                 <div class="ex-div-2">
-                    <div class="expense-budget-div">
-                         <div class="card">
+                    <section class="expense-budget-div">
+                        <!-- the card -->
+                        <!-- <div class="card">
                             <h3>Budget Name</h3>
                             <img src="/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
                                 style="width: 50px; height: 50px; border-radius: 50px;">
                             <div class="currency">
                                <p><span>$</span> 0</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-btn-div">
-                        <button class="btn">-</button>
-                        <button class="btn">+</button>
-                    </div>
+                            <input type="checkbox" class="remove">
+                            <div class="remove">
+                                <span id="ex-remove">➖</span>
+                            </div>
+                        </div> -->
+                    </section>
                 </div>
             </div>
-            Income
+            <!-- Income div-->
             <div class="income-div">
-                <div class="in-div">
-                    <h2>Income:</h2>
-                    <h2><span>$</span> 0</h2>
+                <div class="in-top">
+                    <div class="card-btn-div">
+                        <!-- <button class="btn">-</button> -->
+                        <button class="btn" id="in-ok-btn">+</button>
+                    </div>
+                    <div class="in-div">
+                        <h2>Income:</h2>
+                        <h2><span>$</span><span id="total-in">0</span></h2>
+                    </div>
                 </div>
                 <div class="in-div-2">
-                    <div class="income-budget-div">
-                        <div class="card">
+                    <section class="income-budget-div">
+                        <!-- <div class="card">
                             <h3>Budget Name</h3>
                             <img src="/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
                             style="width: 50px; height: 50px; border-radius: 50px;">
                             <div class="currency">
                                 <p><span>$</span> 0</p>
                             </div>
-                        </div>
-                    </div>
-                    <div class="card-btn-div">
+                            <input type="checkbox" class="remove">
+                            <div class="remove">
+                                <span id="in-remove">➖</span>
+                            </div>
+                        </div> -->
+                    </section>
+                    <!-- <div class="card-btn-div">
                         <button class="btn">-</button>
-                        <button class="btn">+</button>
-                    </div>
+                        <button class="btn" id="in-ok-btn">+</button>
+                    </div> -->
                 </div>
             </div>
         </div>
         <div class="nav-div">
-            <button class="btn">Home</button>
-            <button class="btn">Account</button>
-            <button class="btn">Transaction</button>
-            <button class="btn">Visualize</button>
-            <button class="btn">Settings</button>
+            <button class="btn" id="home">Home</button>
+            <button class="btn" id="account">Account</button>
+            <button class="btn" id="transaction">Transaction</button>
+            <button class="btn" id="visualize">Visualize</button>
+            <button class="btn" id="settings">Settings</button>
         </div>
     </main>
 
