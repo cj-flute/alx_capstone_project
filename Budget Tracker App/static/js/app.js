@@ -1,37 +1,30 @@
 // Import of functions from utility.js
 import {
-    addExpense,
-    addIncome,
-    expenseData,
-    incomeData,
+    addCategory,
     closeForm,
     validate,
-    removeExpense,
-    removeIncome,
+    removeCategory,
     cancel,
     renderCard,
-    balance
+    balance,
+    dataDict
 } from "./utility.js";
 
+// For Expenditure
+const expenseAddDiv = document.querySelector("#expense-add-div");
 const exOkBtn = document.querySelector("#ex-ok-btn");
-const inOkBtn = document.querySelector("#in-ok-btn");
 const exAddBtn = document.querySelector("#ex-add-btn");
-const inAddBtn = document.querySelector("#in-add-btn");
 const totalEx = document.querySelector("#total-ex");
-const totalIn = document.querySelector("#total-in");
 const budgetName = document.querySelector("#budget-name");
 const budgetAmt = document.querySelector("#budget-amount");
-const incomeName = document.querySelector("#income-name");
-const incomeAmt = document.querySelector("#income-amount");
 
+let expense = []; // Array that holds the whole expense
 
-
-// For Expenditure
-const expense = []; // Array that holds the whole expense
 
 // First add button to add an expense
 exOkBtn.addEventListener('click', () => {
-    addExpense();
+    addCategory(expenseAddDiv);
+    // addExpense();
 });
 
 // The Ok button that you triger After inputing the data of expense to be added
@@ -40,41 +33,40 @@ exAddBtn.addEventListener('click', () => {
     if (!isValidate) { 
         return
     }
-
     const ex_renderer = document.querySelector('.expense-budget-div');
-    const exData = expenseData();
+    const exData = dataDict(budgetName, budgetAmt);
     expense.push(exData);
-    renderCard(exData, ex_renderer, createExpenseCard);
-    console.log(expense);
-    let expenseTotalAmount = expense.reduce((accumulator, currentExpense) => {
-        return accumulator + parseInt(currentExpense.budget_amount);
-    }, 0);
-    totalEx.innerHTML = expenseTotalAmount;
-    closeForm();
+    totalEx.innerHTML = renderCard(exData,
+        ex_renderer,
+        createExpenseCard,
+        expense);
+    console.log(totalEx.innerHTML);
+        
+    closeForm(budgetName, budgetAmt, expenseAddDiv);
 });
-
+    
 
 // Function to create a new expense card
 const createExpenseCard = (expenseData) => {
-    const excardDiv = document.createElement("div");
-    excardDiv.setAttribute("class", "card");
-
+        const excardDiv = document.createElement("div");
+        excardDiv.setAttribute("class", "card");
+        
 
     const ex_budget_name = document.createElement("h3");
-    ex_budget_name.innerText = expenseData.budget_name;
+    ex_budget_name.innerText = expenseData.category_name;
     excardDiv.appendChild(ex_budget_name);
-
-
+    
+    
     const imgTag = document.createElement("img");
     imgTag.setAttribute(
         "src",
         "/static/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
-    );
-    imgTag.setAttribute("style", "width: 50px");
+        );
+        imgTag.setAttribute("style", "width: 50px");
     imgTag.setAttribute("style", "height: 50px");
     imgTag.setAttribute("stlye", "border-radius: 50px");
     excardDiv.appendChild(imgTag);
-
+    
 
     const currencyDiv = document.createElement("div");
     currencyDiv.setAttribute("class", "currency");
@@ -83,11 +75,11 @@ const createExpenseCard = (expenseData) => {
     const dollarSpanTag = document.createElement("span");
     dollarSpanTag.innerText = "$";
     pTag.appendChild(dollarSpanTag);
-    pTag.innerText = expenseData.budget_amount;
+    pTag.innerText = expenseData.category_amount;
 
     currencyDiv.appendChild(pTag);
     excardDiv.appendChild(currencyDiv);
-
+    
     const removeCheckBox = document.createElement("input");
     removeCheckBox.setAttribute("class", "remove");
     removeCheckBox.setAttribute("type", "checkbox");
@@ -96,17 +88,22 @@ const createExpenseCard = (expenseData) => {
     return excardDiv;    
 }
 
-
-
 // ################################
 // ################################
 
 // For Income
-const income = []; // Array that holds the whole income
+const incomeAddDiv = document.querySelector("#income-add-div");
+const inOkBtn = document.querySelector("#in-ok-btn");
+const inAddBtn = document.querySelector("#in-add-btn");
+const totalIn = document.querySelector("#total-in");
+const incomeName = document.querySelector("#income-name");
+const incomeAmt = document.querySelector("#income-amount");
+let income = []; // Array that holds the whole income
 
 // First add button to add an income
 inOkBtn.addEventListener('click', () => {
-    addIncome();
+    // addIncome();
+    addCategory(incomeAddDiv);
 });
 
 
@@ -116,17 +113,17 @@ inAddBtn.addEventListener('click', () => {
     if (!isValidate) { 
         return
     }
-
     const in_renderer = document.querySelector('.income-budget-div');
-    const inData = incomeData();
+    const inData = dataDict(incomeName, incomeAmt);
     income.push(inData);
-    renderCard(inData, in_renderer, createIncomeCard);
-    console.log(income);
-    let incomeTotalAmount = income.reduce((accumulator, currentIncome) => {
-        return accumulator + parseInt(currentIncome.income_amount);
-    }, 0);
-    totalIn.innerHTML = incomeTotalAmount;
-    closeForm();
+    totalIn.innerHTML = renderCard(inData,
+        in_renderer,
+        createIncomeCard,
+        income
+    );
+    console.log(totalIn.innerHTML);
+
+    closeForm(incomeName, incomeAmt, incomeAddDiv);
 });
 
 // Function to create a new income card
@@ -136,7 +133,7 @@ const createIncomeCard = (incomeData) => {
 
 
     const in_budget_name = document.createElement("h3");
-    in_budget_name.innerText = incomeData.income_name;
+    in_budget_name.innerText = incomeData.category_name;
     incardDiv.appendChild(in_budget_name);
 
 
@@ -158,7 +155,7 @@ const createIncomeCard = (incomeData) => {
     const dollarSpanTag = document.createElement("span");
     dollarSpanTag.innerText = "$";
     pTag.appendChild(dollarSpanTag);
-    pTag.innerText = incomeData.income_amount;
+    pTag.innerText = incomeData.category_amount;
 
     currencyDiv.appendChild(pTag);
     incardDiv.appendChild(currencyDiv);
@@ -179,8 +176,8 @@ const createIncomeCard = (incomeData) => {
 const exCancel = document.querySelector("#ex-cancel");
 const inCancel = document.querySelector("#in-cancel");
 exCancel.addEventListener('click', () => {
-    cancel();
+    cancel(budgetName, budgetAmt, expenseAddDiv);
 })
 inCancel.addEventListener('click', () => {
-    cancel();
+    cancel(incomeName, incomeAmt, incomeAddDiv);
 })

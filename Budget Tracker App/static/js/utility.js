@@ -1,72 +1,38 @@
-const budgetName = document.querySelector("#budget-name");
-const budgetAmt = document.querySelector("#budget-amount");
-const incomeName = document.querySelector("#income-name");
-const incomeAmt = document.querySelector("#income-amount");
-const expenseAddDiv = document.querySelector("#expense-add-div");
-const incomeAddDiv = document.querySelector("#income-add-div");
-
-
-
-// Function to make the div to add expense visible
-const addExpense = () => {
-    expenseAddDiv.style.display = "block";
+// Function to make the add category visible
+const addCategory = (categoryDiv) => {
+    categoryDiv.style.display = "block";
 }
 
-// Function to make the div to add income visible
-const addIncome = () => { 
-    incomeAddDiv.style.display = "block";
+// Function to remove a category
+const removeCategory = (categoryDiv) => {
+    alert('removed');
 }
 
-
-// Function to remove an expense
-const removeExpense = () => { 
-    alert('remove expense');
-}
-
-// Function to remove an income
-const removeIncome = () => { 
-    alert('remove income');
-}
-
-
-// Funtion that returns the value of the inputed Expense and ammount
-const expenseData = () => {
-    const budget_name = budgetName.value;
-    const budget_amount = budgetAmt.value;
+// Funtion that returns the value of the inputed Expense or income and ammount
+const dataDict = (categoryName, categoryAmount) => {
+    const category_name = categoryName.value;
+    const category_amount = parseInt(categoryAmount.value);
     return {
-        budget_name, budget_amount
-    }
-}
-
-// Fundtion that returns the value of the inputed income and ammount
-const incomeData = () => {
-    const income_name = incomeName.value;
-    const income_amount = incomeAmt.value;
-    return {
-        income_name, income_amount
+        category_name, category_amount
     }
 }
 
 // Funtion to reset the expense form or the income form
-const resetForm = () => {
-    budgetName.value = '';
-    budgetAmt.value = '';
-    incomeName.value = '';
-    incomeAmt.value = '';
+const resetForm = (categoryName, categoryAmount) => {
+    categoryName.value = '';
+    categoryAmount.value = '';
 }
 
 // functioin that closes the inputed value 
-const closeForm = () => { 
-    expenseAddDiv.style.display = "none";
-    incomeAddDiv.style.display = "none";
-    resetForm();
+const closeForm = (categoryName, categoryAmount, categoryDiv) => {
+    categoryDiv.style.display = "none";
+    resetForm(categoryName, categoryAmount);
 }
 
 // function to hide expense or income add imput
-const cancel = () => { 
-    expenseAddDiv.style.display = "none";
-    incomeAddDiv.style.display = "none";
-    resetForm();
+const cancel = (categoryName, categoryAmount, categoryDiv) => {
+    categoryDiv.style.display = "none";
+    resetForm(categoryName, categoryAmount);
 }
 
 // function to validate
@@ -80,9 +46,20 @@ const validate = (name, amount) => {
 }
 
 // Function to render the Expense or income card created
-const renderCard = (data, div, createFunc) => {
+let renderCard = (
+    data,
+    div,
+    createFunc,
+    arrayData
+    ) => {
     const item = createFunc(data);
     div.appendChild(item);
+    console.log(arrayData);
+    let totalAmount = arrayData.reduce((accumulator, initial) => {
+        return accumulator + initial.category_amount;
+    }, 0);
+    console.log(`The total Amount is ${totalAmount}`);
+    return totalAmount;
 }
 
 const balance = (incomeTotal, expenseTotal) => {
@@ -90,18 +67,14 @@ const balance = (incomeTotal, expenseTotal) => {
     return (incomeTotal - expenseTotal) 
 }
 
-
 // Funtions exported to app.js
 export {
-    addExpense,
-    addIncome,
-    removeExpense,
-    removeIncome,
-    expenseData,
-    incomeData,
+    addCategory,
+    removeCategory,
     closeForm,
     cancel,
     validate,
     renderCard,
-    balance
+    balance,
+    dataDict
 }
