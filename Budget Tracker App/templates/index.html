@@ -7,16 +7,6 @@
     <link rel="stylesheet" href="/static/css/styles.css">
 </head>
 <body>
-    <!-- modal-div -->
-    <div class="modal-div">
-        <div class="modal">
-            <label><h2>Name of Ledger</h2></label><br>
-            <input type="text" id="input-ledger-name" style="border: none;" placeholder="USER"><br>
-            <button>OK</button>
-        </div>
-        <div class="cancel">❌</div>
-    </div>
-
     <!-- Expense-add-div -->
     <div class="add-div" id="expense-add-div">
         <div class="add">
@@ -38,13 +28,24 @@
         </div>
     </div>
 
+    <!-- Save-add-div -->
+    <div class="add-div" id="save-add-div">
+        <div class="add">
+            <h2>Save</h2>
+            <input type="text" placeholder="Savings Name" id="save-name"><br>
+            <input type="number" placeholder="Amount" id="save-amount"><br>
+            <button class="add-btn" id="save-add-btn">OK</button>
+            <div class="cancel" id="save-cancel">❌</div>
+        </div>
+    </div>
+
     <!-- main index -->
     <main>
         <h1>Budget Tracker App</h1>
         <div id="app-div">
             <div class="ledger">
                 <div>
-                    <label for="name of leger"><h2 id="ledger-name">Name of Ledger</h2</label>
+                    <label for="name of leger"><h2 id="ledger-name">Name of Ledger</h2/></label>
                     </div>
                 <div>
                     <label for="month"><h2>Month</h2></label>
@@ -116,16 +117,29 @@
                     </div> -->
                 </div>
             </div>
+
+            <div class="saving-div">
+                <div class="save-top">
+                    <div class="card-btn-div">
+                        <!-- <button class="btn">-</button> -->
+                        <button class="btn" id="save-ok-btn">+</button>
+                    </div>
+                    <div class="save-div">
+                        <h2>Saving:</h2>
+                        <h2><span>$</span><span id="total-save">0</span></h2>
+                    </div>
+                </div>
+                <div class="save-div-2">
+                    <section class="save-budget-div"></section>
+                </div>
+            </div>
         </div>
         <div class="nav-div">
             <nav>
                 <ol class="links">
                     <a href="http://127.0.0.1:5000" id="home">Home</a>
-                    <a href="">Account</a>
-                    <a href="">Transaction</a>
                     <a href="">Visualize</a>
                     <a href="">Settings</a>
-
                 </ol>
             </nav>
         </div>

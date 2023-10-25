@@ -68,7 +68,8 @@ main {
     width: var(--small-width);
 }
 .expense-div,
-.income-div {
+.income-div,
+.saving-div {
     width: var(--medium-width);
     display: flex;
     margin-left: var(--margin-left);
@@ -76,7 +77,8 @@ main {
     flex-direction: column;
 }
 .ex-div,
-.in-div {
+.in-div,
+.save-div {
     display: flex;
     height: var(--small-height);
     width: var(--medium-width);
@@ -87,7 +89,8 @@ main {
 }
 
 .expense-budget-div,
-.income-budget-div {
+.income-budget-div,
+.save-budget-div {
     background-color: var(--color-1);
     width: var(--big-width);
     padding: 5px;
@@ -96,7 +99,7 @@ main {
     gap: 20px;
     flex-wrap: wrap;
 }
-.ex-top, .in-top {
+.ex-top, .in-top, .save-top {
     display: flex;
     /* border: var(--test-border-1); */
     /* justify-content: center; */
