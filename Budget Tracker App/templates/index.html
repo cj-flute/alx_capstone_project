@@ -36,6 +36,7 @@
             <input type="number" placeholder="Amount" id="save-amount"><br>
             <button class="add-btn" id="save-add-btn">OK</button>
             <div class="cancel" id="save-cancel">❌</div>
+            <p id="savings-warning" style="color: red; display: none;">Sorry, You can't save. Make up your income.</p>
         </div>
     </div>
 
@@ -43,7 +44,7 @@
     <main>
         <h1>Budget Tracker App</h1>
         <div id="app-div">
-            <div class="ledger">
+            <!-- <div class="ledger">
                 <div>
                     <label for="name of leger"><h2 id="ledger-name">Name of Ledger</h2/></label>
                     </div>
@@ -52,7 +53,7 @@
                     <input type="month" id="month" name="month" style="border: none;">
                 </div>
                 
-            </div>
+            </div> -->
 
             <!-- Expense div -->
             <div class="expense-div">
@@ -76,9 +77,9 @@
                             <div class="currency">
                                <p><span>$</span> 0</p>
                             </div>
-                            <input type="checkbox" class="remove">
                             <div class="remove">
-                                <span id="ex-remove">➖</span>
+                                <button id="btn-edit">Edit</button>
+                                <button id="btn-delete">delete</button>
                             </div>
                         </div> -->
                     </section>
@@ -134,6 +135,13 @@
                 </div>
             </div>
         </div>
+        <div class="balance-div">
+            <div>
+                <h3 class="bl">Balance:</h3>
+                <h3 class="bl">$<span id="balance"></span></h3>
+            </div>
+        </div>
+
         <div class="nav-div">
             <nav>
                 <ol class="links">

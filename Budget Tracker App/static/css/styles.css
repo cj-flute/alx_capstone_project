@@ -54,7 +54,11 @@ body {
 
 main {
     margin-top: var(--margin-top);
-    height: 1000px;
+    height: 100%;
+    border: 2px solid green;
+    border-radius: 5px;
+    width: var(--medium-width);
+    margin-left: var(--margin-left);
 }
 .ledger {
     display: flex;
@@ -112,7 +116,12 @@ main {
 }
 .currency,
 .card img {
-    margin-top: 25px;
+    margin-top: 15px;
+}
+.currency p {
+    display: flex;
+    width: 50%;
+    margin-left: 30%;
 }
 
 .card-btn-div button {
@@ -130,9 +139,7 @@ main {
 .card-btn-div button:active {
     color: var(--color-2);
 }
-/* .remove {
-    position: absolute;
-} */
+
 .nav-div {
     width: var(--medium-width);
     margin-left: var(--margin-left);
@@ -197,4 +204,38 @@ nav {
     height: 40px;
     margin-left: 35px;
     border-radius: 5px;
+}
+.balance-div {
+    height: 10%;
+    width: var(--medium-width);
+    margin-left: var(--margin-left);
+}
+.balance-div div {
+    margin-top: 10%;
+    display: flex;
+    gap: 10PX;
+    font-size: 30px;
+    background-color: var(--color-1);
+    border-radius: 5px;
+}
+.bl {
+    color: green;
+}
+
+#btn-edit, #btn-delete {
+    width: 40%;
+    height: auto;
+    border-radius: 5px;
+}
+#btn-edit {
+    background-color: green;
+}
+#btn-delete {
+    background-color: red;
+}
+#btn-edit:active {
+    background-color: rgba(78, 243, 78, 0.748);
+}
+#btn-delete:active {
+    background-color: rgba(245, 79, 79, 0.744);
 }

@@ -31,8 +31,7 @@ const closeForm = (categoryName, categoryAmount, categoryDiv) => {
 
 // function to hide expense or income add imput
 const cancel = (categoryName, categoryAmount, categoryDiv) => {
-    categoryDiv.style.display = "none";
-    resetForm(categoryName, categoryAmount);
+    closeForm(categoryName, categoryAmount, categoryDiv);
 }
 
 // function to validate
@@ -47,13 +46,15 @@ const validate = (name, amount) => {
 
 // Function to render the Expense or income card created
 let renderCard = (
-    data,
     div,
     createFunc,
     arrayData
-    ) => {
-    const item = createFunc(data);
-    div.appendChild(item);
+) => {
+    div.innerHTML = '';
+    arrayData.forEach((element) => {
+        const item = createFunc(element);
+        div.appendChild(item);
+    })
     console.log(arrayData);
     let totalAmount = arrayData.reduce((accumulator, initial) => {
         return accumulator + initial.category_amount;
@@ -62,9 +63,16 @@ let renderCard = (
     return totalAmount;
 }
 
-const balance = (incomeTotal, expenseTotal) => {
-    console.log(incomeTotal - expenseTotal);
-    return (incomeTotal - expenseTotal) 
+const balance = (incomeTotal, expenseTotal, savingsTotal, bal) => {
+    let bals = parseInt(incomeTotal) - parseInt(expenseTotal) - parseInt(savingsTotal);
+    bal.innerHTML = bals;
+    if (bals < 11) {
+        bal.style.color = "red";
+    }
+    else { 
+        bal.style.color = "green";
+    }
+    return bals
 }
 
 // Funtions exported to app.js
