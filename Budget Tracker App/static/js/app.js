@@ -1,19 +1,20 @@
 // Import of functions from utility.js
 import {
-    addCategory,
+    getCategory,
     closeForm,
     validate,
-    removeCategory,
     cancel,
     renderCard,
     balance,
-    dataDict
+    dataDict,
+    setData
 } from "./utility.js";
 
 // Balance
 let totalIncome = 0;
 let totalExpense = 0;
-let toatalSavings = 0;
+let totalSavings = 0;
+let currentIndex = -1;
 const bal = document.querySelector("#balance");
 
 // For Expenditure
@@ -23,11 +24,12 @@ const exAddBtn = document.querySelector("#ex-add-btn");
 const totalEx = document.querySelector("#total-ex");
 const budgetName = document.querySelector("#budget-name");
 const budgetAmt = document.querySelector("#budget-amount");
+const ex_renderer = document.querySelector('.expense-budget-div');
 let expense = []; // Array that holds the whole expense
 
 // First add button to add an expense
 exOkBtn.addEventListener('click', () => {
-    addCategory(expenseAddDiv);
+    getCategory(expenseAddDiv);
 });
 
 // The Ok button that you triger After inputing the data of expense to be added
@@ -36,21 +38,38 @@ exAddBtn.addEventListener('click', () => {
     if (!isValidate) { 
         return
     }
-    const ex_renderer = document.querySelector('.expense-budget-div');
+    if (totalExpense < parseInt(budgetAmt.value)) {
+        document.querySelector("#expense-warning").style.display = "block";
+        return
+    }
     const exData = dataDict(budgetName, budgetAmt);
-    expense.push(exData);
+
+    let currentbtn = exAddBtn.innerHTML;
+
+    // Add or Edit condition for expense
+    if (currentbtn === "Edit") {
+        // edit
+        console.log("in");
+        expense[currentIndex] = exData;
+        exAddBtn.innerHTML = "ok";
+        currentIndex = -1;
+    }
+    else {
+        expense.push(exData);
+    }
+
     totalExpense = renderCard(
         ex_renderer,
         createExpenseCard,
         expense
     );
     totalEx.innerHTML = totalExpense;
-    balance(totalIncome, totalExpense, toatalSavings, bal);
+    balance(totalIncome, totalExpense, totalSavings, bal);
     closeForm(budgetName, budgetAmt, expenseAddDiv);
 });
 
 // Function to create a new expense card
-const createExpenseCard = (expenseData) => {
+const createExpenseCard = (expenseData, index) => {
     const excardDiv = document.createElement("div");
     excardDiv.setAttribute("class", "card");
     
@@ -90,9 +109,31 @@ const createExpenseCard = (expenseData) => {
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit");
     btnEdit.textContent = "Edit";
+    
+    // Edit functionality in the card creation for expense
+    btnEdit.addEventListener('click', () => {
+        console.log("You clicked edit for " + expenseData.category_name);
+        setData(budgetName,
+            budgetAmt,
+            expense[index],
+            exAddBtn
+        );
+        getCategory(expenseAddDiv);
+        currentIndex = index;
+    });
+
     const btnDelete = document.createElement("button");
     btnDelete.setAttribute("id", "btn-delete");
     btnDelete.textContent = "Delete";
+
+    // Delete funtionality in the card creation for expense
+    btnDelete.addEventListener('click', () => {
+        expense.splice(index, 1);
+        totalExpense = renderCard(ex_renderer, createExpenseCard, expense);
+        totalEx.innerHTML = totalExpense;
+        balance(totalIncome, totalExpense, totalSavings, bal);
+    });
+
     editDeleteDiv.appendChild(btnEdit);
     editDeleteDiv.appendChild(btnDelete);
     excardDiv.appendChild(editDeleteDiv);
@@ -111,12 +152,13 @@ const inAddBtn = document.querySelector("#in-add-btn");
 const totalIn = document.querySelector("#total-in");
 const incomeName = document.querySelector("#income-name");
 const incomeAmt = document.querySelector("#income-amount");
+const in_renderer = document.querySelector('.income-budget-div');
 let income = []; // Array that holds the whole income
 
 
 // First add button to add an income
 inOkBtn.addEventListener('click', () => {
-    addCategory(incomeAddDiv);
+    getCategory(incomeAddDiv);
 });
 
 
@@ -126,21 +168,33 @@ inAddBtn.addEventListener('click', () => {
     if (!isValidate) { 
         return
     }
-    const in_renderer = document.querySelector('.income-budget-div');
     const inData = dataDict(incomeName, incomeAmt);
-    income.push(inData);
+
+    let currentbtn = inAddBtn.innerHTML;
+
+    // Add or Edit condition for income
+    if (currentbtn === "Edit") {
+        // edit
+        income[currentIndex] = inData;
+        inAddBtn.innerHTML = "ok";
+        currentIndex = -1;
+    }
+    else {
+        income.push(inData);
+    }
+
     totalIncome = renderCard(
         in_renderer,
         createIncomeCard,
         income
     );
     totalIn.innerHTML = totalIncome;
-    balance(totalIncome, totalExpense, toatalSavings, bal);
+    balance(totalIncome, totalExpense, totalSavings, bal);
     closeForm(incomeName, incomeAmt, incomeAddDiv);
 });
     
 // Function to create a new income card
-const createIncomeCard = (incomeData) => {
+const createIncomeCard = (incomeData, index) => {
     const incardDiv = document.createElement("div");
     incardDiv.setAttribute("class", "card");
     
@@ -154,14 +208,14 @@ const createIncomeCard = (incomeData) => {
     imgTag.setAttribute(
         "src",
         "/static/assets/images/pngtree-budget-line-icon-png-image_6620500.png"
-        );
-        imgTag.setAttribute("style", "width: 50px");
-        imgTag.setAttribute("style", "height: 50px");
-        imgTag.setAttribute("stlye", "border-radius: 50px");
-        incardDiv.appendChild(imgTag);
-        
-        
-        const currencyDiv = document.createElement("div");
+    );
+    imgTag.setAttribute("style", "width: 50px");
+    imgTag.setAttribute("style", "height: 50px");
+    imgTag.setAttribute("stlye", "border-radius: 50px");
+    incardDiv.appendChild(imgTag);
+    
+    
+    const currencyDiv = document.createElement("div");
     currencyDiv.setAttribute("class", "currency");
 
     const pTag = document.createElement("p");
@@ -182,9 +236,30 @@ const createIncomeCard = (incomeData) => {
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit");
     btnEdit.textContent = "Edit";
+
+    // Edit functionality in the card creation for income
+    btnEdit.addEventListener('click', () => {
+        setData(incomeName,
+            incomeAmt,
+            income[index],
+            inAddBtn
+        );
+        getCategory(incomeAddDiv);
+        currentIndex = index;
+    });
+
+    // Delete funtionality in the card creation for income
     const btnDelete = document.createElement("button");
     btnDelete.setAttribute("id", "btn-delete");
     btnDelete.textContent = "Delete";
+
+    btnDelete.addEventListener('click', () => {
+        income.splice(index, 1);
+        totalIncome = renderCard(in_renderer, createIncomeCard, income);
+        totalIn.innerHTML = totalIncome;
+        balance(totalIncome, totalExpense, totalSavings, bal);
+    });
+
     editDeleteDiv.appendChild(btnEdit);
     editDeleteDiv.appendChild(btnDelete);
     incardDiv.appendChild(editDeleteDiv);
@@ -202,13 +277,14 @@ const saveAddBtn = document.querySelector("#save-add-btn");
 const totalSave = document.querySelector("#total-save");
 const saveName = document.querySelector("#save-name");
 const saveAmt = document.querySelector("#save-amount");
+const save_renderer = document.querySelector('.save-budget-div');
 let savings = []; // Array that holds the whole savings
 
 
 
 // First add button to add an save
 saveOkBtn.addEventListener('click', () => {
-    addCategory(saveAddDiv);
+    getCategory(saveAddDiv);
 });
 
 
@@ -222,21 +298,33 @@ saveAddBtn.addEventListener('click', () => {
         document.querySelector("#savings-warning").style.display = "block";
         return
     }
-    const save_renderer = document.querySelector('.save-budget-div');
     const saveData = dataDict(saveName, saveAmt);
-    savings.push(saveData);
-    toatalSavings = renderCard(
+
+    let currentbtn = saveAddBtn.innerHTML;
+
+    // Add or Edit condition for save
+    if (currentbtn === "Edit") {
+        // edit
+        savings[currentIndex] = saveData;
+        saveAddBtn.innerHTML = "ok";
+        currentIndex = -1;
+    }
+    else {
+        savings.push(saveData);
+    }
+
+    totalSavings = renderCard(
         save_renderer,
         createSaveCard,
         savings
     );
-    totalSave.innerHTML = toatalSavings; 
-    balance(totalIncome, totalExpense, toatalSavings, bal);
+    totalSave.innerHTML = totalSavings; 
+    balance(totalIncome, totalExpense, totalSavings, bal);
     closeForm(saveName, saveAmt, saveAddDiv);
 });
     
 // Function to create a new save card
-const createSaveCard = (saveData) => {
+const createSaveCard = (saveData, index) => {
     const savecardDiv = document.createElement("div");
     savecardDiv.setAttribute("class", "card");
     
@@ -279,9 +367,30 @@ const createSaveCard = (saveData) => {
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit");
     btnEdit.textContent = "Edit";
+
+    // Edit functionality in the card creation for save
+    btnEdit.addEventListener('click', () => {
+        setData(saveName,
+            saveAmt,
+            savings[index],
+            saveAddBtn
+        );
+        getCategory(saveAddDiv);
+        currentIndex = index;
+    });
+
     const btnDelete = document.createElement("button");
     btnDelete.setAttribute("id", "btn-delete");
     btnDelete.textContent = "Delete";
+
+    // Delete funtionality in the card creation for save
+    btnDelete.addEventListener('click', () => {
+        savings.splice(index, 1);
+        totalSavings = renderCard(save_renderer, createSaveCard, savings);
+        totalSave.innerHTML = totalSavings;
+        balance(totalIncome, totalExpense, totalSavings, bal);
+    });
+
     editDeleteDiv.appendChild(btnEdit);
     editDeleteDiv.appendChild(btnDelete);
     savecardDiv.appendChild(editDeleteDiv);

@@ -1,11 +1,6 @@
 // Function to make the add category visible
-const addCategory = (categoryDiv) => {
+const getCategory = (categoryDiv) => {
     categoryDiv.style.display = "block";
-}
-
-// Function to remove a category
-const removeCategory = (categoryDiv) => {
-    alert('removed');
 }
 
 // Funtion that returns the value of the inputed Expense or income and ammount
@@ -26,6 +21,8 @@ const resetForm = (categoryName, categoryAmount) => {
 // functioin that closes the inputed value 
 const closeForm = (categoryName, categoryAmount, categoryDiv) => {
     categoryDiv.style.display = "none";
+    document.querySelector("#expense-warning").style.display = 'none';
+    document.querySelector("#savings-warning").style.display = "none";
     resetForm(categoryName, categoryAmount);
 }
 
@@ -51,8 +48,8 @@ let renderCard = (
     arrayData
 ) => {
     div.innerHTML = '';
-    arrayData.forEach((element) => {
-        const item = createFunc(element);
+    arrayData.forEach((element, index) => {
+        const item = createFunc(element, index);
         div.appendChild(item);
     })
     console.log(arrayData);
@@ -75,14 +72,24 @@ const balance = (incomeTotal, expenseTotal, savingsTotal, bal) => {
     return bals
 }
 
+const setData = (budgetName,
+    budgetAmt,
+    arrayData,
+    btn
+) => {
+    budgetName.value = arrayData.category_name;
+    budgetAmt.value = arrayData.category_amount;
+    btn.innerHTML = "Edit";
+}
+
 // Funtions exported to app.js
 export {
-    addCategory,
-    removeCategory,
+    getCategory,
     closeForm,
     cancel,
     validate,
     renderCard,
     balance,
-    dataDict
+    dataDict,
+    setData
 }
