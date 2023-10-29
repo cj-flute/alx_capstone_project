@@ -1,0 +1,16 @@
+.expenses, .incomes, .savings, .categories{
+    /* border: 1px solid black; */
+    width: 90%;
+    font-size: large;
+    margin-left: 5%;
+    margin-top: 5px;
+}
+section {
+    border: 2px solid green;
+    border-radius: 5px;
+    margin: 10%;
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+}

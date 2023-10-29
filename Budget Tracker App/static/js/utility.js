@@ -48,10 +48,14 @@ let renderCard = (
     arrayData
 ) => {
     div.innerHTML = '';
-    arrayData.forEach((element, index) => {
-        const item = createFunc(element, index);
+    for (let i = 0; i < arrayData.length; i++){
+        const item = createFunc(arrayData[i], i);
         div.appendChild(item);
-    })
+    }
+    // arrayData.forEach((element, index) => {
+    //     const item = createFunc(element, index);
+    //     div.appendChild(item);
+    // })
     console.log(arrayData);
     let totalAmount = arrayData.reduce((accumulator, initial) => {
         return accumulator + initial.category_amount;
@@ -91,5 +95,6 @@ export {
     renderCard,
     balance,
     dataDict,
-    setData
+    setData,
+    createCategoryVisualList
 }

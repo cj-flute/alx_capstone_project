@@ -5,9 +5,14 @@ app = Flask(__name__)
 
 
 @app.route('/')
-def hello():
+@app.route('/home')
+def home():
     return render_template('index.html')
 
+
+@app.route('/visual')
+def visual():
+    return render_template('visual.html')
 
 
 if __name__ == '__main__':

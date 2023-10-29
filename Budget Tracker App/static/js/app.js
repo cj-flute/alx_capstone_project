@@ -7,7 +7,7 @@ import {
     renderCard,
     balance,
     dataDict,
-    setData
+    setData,
 } from "./utility.js";
 
 // Balance
@@ -16,6 +16,7 @@ let totalExpense = 0;
 let totalSavings = 0;
 let currentIndex = -1;
 const bal = document.querySelector("#balance");
+bal.innerText = 0;
 
 // For Expenditure
 const expenseAddDiv = document.querySelector("#expense-add-div");
@@ -25,22 +26,32 @@ const totalEx = document.querySelector("#total-ex");
 const budgetName = document.querySelector("#budget-name");
 const budgetAmt = document.querySelector("#budget-amount");
 const ex_renderer = document.querySelector('.expense-budget-div');
-let expense = []; // Array that holds the whole expense
+let expense = []; // Local storage that holds the whole expense
+const storedExpense = localStorage.getItem('expense');
+if (storedExpense) {
+    try {
+        expense = JSON.parse(storedExpense);
+    } catch (error) {
+        console.error('Error parsing income data: ', error);
+        expense = [];
+    }
+}
+
 
 // First add button to add an expense
-exOkBtn.addEventListener('click', () => {
+exOkBtn?.addEventListener('click', () => {
     getCategory(expenseAddDiv);
 });
 
 // The Ok button that you triger After inputing the data of expense to be added
-exAddBtn.addEventListener('click', () => {
+exAddBtn?.addEventListener('click', () => {
     const isValidate = validate(budgetName, budgetAmt);
     if (!isValidate) { 
         return
     }
-    if (totalExpense < parseInt(budgetAmt.value)) {
+    if (totalIncome < parseInt(budgetAmt.value)) {
         document.querySelector("#expense-warning").style.display = "block";
-        return
+        return;
     }
     const exData = dataDict(budgetName, budgetAmt);
 
@@ -65,8 +76,13 @@ exAddBtn.addEventListener('click', () => {
     );
     totalEx.innerHTML = totalExpense;
     balance(totalIncome, totalExpense, totalSavings, bal);
+    
+    const stringifyExpense = JSON.stringify(expense);
+    localStorage.setItem("expense", stringifyExpense);
+
     closeForm(budgetName, budgetAmt, expenseAddDiv);
 });
+
 
 // Function to create a new expense card
 const createExpenseCard = (expenseData, index) => {
@@ -112,7 +128,6 @@ const createExpenseCard = (expenseData, index) => {
     
     // Edit functionality in the card creation for expense
     btnEdit.addEventListener('click', () => {
-        console.log("You clicked edit for " + expenseData.category_name);
         setData(budgetName,
             budgetAmt,
             expense[index],
@@ -129,6 +144,9 @@ const createExpenseCard = (expenseData, index) => {
     // Delete funtionality in the card creation for expense
     btnDelete.addEventListener('click', () => {
         expense.splice(index, 1);
+        const stringifyExpense = JSON.stringify(expense);
+        localStorage.setItem("expense", stringifyExpense);
+
         totalExpense = renderCard(ex_renderer, createExpenseCard, expense);
         totalEx.innerHTML = totalExpense;
         balance(totalIncome, totalExpense, totalSavings, bal);
@@ -141,6 +159,13 @@ const createExpenseCard = (expenseData, index) => {
     
     return excardDiv;    
 }
+totalExpense = renderCard(
+        ex_renderer,
+        createExpenseCard,
+        expense
+);
+totalEx.innerHTML = totalExpense;
+balance(totalIncome, totalExpense, totalSavings, bal);
 
 // ################################
 // ################################
@@ -153,7 +178,16 @@ const totalIn = document.querySelector("#total-in");
 const incomeName = document.querySelector("#income-name");
 const incomeAmt = document.querySelector("#income-amount");
 const in_renderer = document.querySelector('.income-budget-div');
-let income = []; // Array that holds the whole income
+let income = []; // localstorage that holds the whole income
+const storedIncome = localStorage.getItem('income');
+if (storedIncome) {
+    try {
+        income = JSON.parse(storedIncome);
+    } catch (error) {
+        console.error('Error parsing income data: ', error);
+        income = [];
+    }
+}
 
 
 // First add button to add an income
@@ -190,9 +224,13 @@ inAddBtn.addEventListener('click', () => {
     );
     totalIn.innerHTML = totalIncome;
     balance(totalIncome, totalExpense, totalSavings, bal);
+
+    const stringifyIncome = JSON.stringify(income);
+    localStorage.setItem("income", stringifyIncome);
+    
     closeForm(incomeName, incomeAmt, incomeAddDiv);
 });
-    
+
 // Function to create a new income card
 const createIncomeCard = (incomeData, index) => {
     const incardDiv = document.createElement("div");
@@ -202,8 +240,8 @@ const createIncomeCard = (incomeData, index) => {
     const in_budget_name = document.createElement("h3");
     in_budget_name.innerText = incomeData.category_name;
     incardDiv.appendChild(in_budget_name);
-
-
+    
+    
     const imgTag = document.createElement("img");
     imgTag.setAttribute(
         "src",
@@ -232,7 +270,7 @@ const createIncomeCard = (incomeData, index) => {
     
     const editDeleteDiv = document.createElement("div");
     editDeleteDiv.setAttribute("class", "edit-delete-div");
-
+    
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit");
     btnEdit.textContent = "Edit";
@@ -247,25 +285,35 @@ const createIncomeCard = (incomeData, index) => {
         getCategory(incomeAddDiv);
         currentIndex = index;
     });
-
+        
     // Delete funtionality in the card creation for income
     const btnDelete = document.createElement("button");
     btnDelete.setAttribute("id", "btn-delete");
     btnDelete.textContent = "Delete";
-
+    
     btnDelete.addEventListener('click', () => {
         income.splice(index, 1);
+        const stringifyIncome = JSON.stringify(income);
+        localStorage.setItem("income", stringifyIncome);
+        
         totalIncome = renderCard(in_renderer, createIncomeCard, income);
         totalIn.innerHTML = totalIncome;
         balance(totalIncome, totalExpense, totalSavings, bal);
     });
-
+    
     editDeleteDiv.appendChild(btnEdit);
     editDeleteDiv.appendChild(btnDelete);
     incardDiv.appendChild(editDeleteDiv);
-
+    
     return incardDiv;    
 }
+totalIncome = renderCard(
+        in_renderer,
+        createIncomeCard,
+        income
+    );
+totalIn.innerHTML = totalIncome;
+balance(totalIncome, totalExpense, totalSavings, bal);
 
 // ################################
 // ################################
@@ -279,6 +327,15 @@ const saveName = document.querySelector("#save-name");
 const saveAmt = document.querySelector("#save-amount");
 const save_renderer = document.querySelector('.save-budget-div');
 let savings = []; // Array that holds the whole savings
+const storedSavings = localStorage.getItem('savings');
+if (storedSavings) {
+    try {
+        savings = JSON.parse(storedSavings);
+    } catch (error) {
+        console.error('Error parsing income data: ', error);
+        savings = [];
+    }
+}
 
 
 
@@ -320,6 +377,9 @@ saveAddBtn.addEventListener('click', () => {
     );
     totalSave.innerHTML = totalSavings; 
     balance(totalIncome, totalExpense, totalSavings, bal);
+
+    const stringifySavings = JSON.stringify(savings);
+    localStorage.setItem("savings", stringifySavings);
     closeForm(saveName, saveAmt, saveAddDiv);
 });
     
@@ -386,6 +446,9 @@ const createSaveCard = (saveData, index) => {
     // Delete funtionality in the card creation for save
     btnDelete.addEventListener('click', () => {
         savings.splice(index, 1);
+        const stringifySavings = JSON.stringify(savings);
+        localStorage.setItem("savings", stringifySavings);
+
         totalSavings = renderCard(save_renderer, createSaveCard, savings);
         totalSave.innerHTML = totalSavings;
         balance(totalIncome, totalExpense, totalSavings, bal);
@@ -397,6 +460,13 @@ const createSaveCard = (saveData, index) => {
 
     return savecardDiv;    
 }
+totalSavings = renderCard(
+        save_renderer,
+        createSaveCard,
+        savings
+);
+totalSave.innerHTML = totalSavings; 
+balance(totalIncome, totalExpense, totalSavings, bal);
 
 
 // #################################
@@ -408,10 +478,10 @@ const inCancel = document.querySelector("#in-cancel");
 const saveCancel = document.querySelector("#save-cancel");
 exCancel.addEventListener('click', () => {
     cancel(budgetName, budgetAmt, expenseAddDiv);
-})
+});
 inCancel.addEventListener('click', () => {
     cancel(incomeName, incomeAmt, incomeAddDiv);
-})
+});
 saveCancel.addEventListener('click', () => {
     cancel(saveName, saveAmt, saveAddDiv);
-})
+});

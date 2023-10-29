@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+{%block title%}
+    <title>Visualize</title>
+{%endblock%}
+
+
+{% block content %}
+    <section>
+        <div class="total-expenditure-div">
+            <h1>Expense: $<span id="total-expenditure">0</span></h1>
+        </div>
+        <div class="categories" id="category-div">
+            <div class="categories" id="the-categories">
+                <b class="the-category">
+                    <span id="category">[Expenditure]</span>
+                    <span id="category-colon-dollar">: $</span>
+                    <span id="the-category-amt">[Amt]</span>
+                </b>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="total-income-div">
+            <h1>Income: $<span id="total-incomes">0</span></h1>
+        </div>
+        <div class="incomes">
+            <div class="incomes">
+                <b id="the-income">[Income]</b><b>: $</b><b id="the-income-amt">[Amt]</b>
+            </div>
+            <div class="incomes">
+                <b id="the-income">[Income]</b><b>: $</b><b id="the-income-amt">[Amt]</b>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="total-saving-div">
+            <h1>Savings: $<span id="total-keeps">0</span></h1>
+        </div>
+        <div class="savings">
+            <div class="savings">
+                <b id="the-saving">[Saving]</b><b>: $</b><b id="the-saving-amt">[Amt]</b>
+            </div>
+            <div class="savings">
+                <b id="the-saving">[Saving]</b><b>: $</b><b id="the-saving-amt">[Amt]</b>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+{% block script %}
+    <script type="module" src="/static/js/visual.js"></script>
+{% endblock script %}
