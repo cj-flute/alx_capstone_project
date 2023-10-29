@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 from flask import Flask, render_template, url_for
+from dotenv import load_dotenv
+load_dotenv()
 
 app = Flask(__name__)
 
