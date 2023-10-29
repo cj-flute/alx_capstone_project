@@ -332,12 +332,10 @@ if (storedSavings) {
     try {
         savings = JSON.parse(storedSavings);
     } catch (error) {
-        console.error('Error parsing income data: ', error);
+        console.error('Error parsing savings data: ', error);
         savings = [];
     }
 }
-
-
 
 // First add button to add an save
 saveOkBtn.addEventListener('click', () => {

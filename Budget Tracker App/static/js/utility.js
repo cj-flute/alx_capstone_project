@@ -96,5 +96,4 @@ export {
     balance,
     dataDict,
     setData,
-    createCategoryVisualList
 }
