@@ -1,8 +1,8 @@
-.expenses, .incomes, .savings, .categories{
+.expenses, .incomes, .savings, .categories, .cat{
     /* border: 1px solid black; */
     width: 90%;
     font-size: large;
-    margin-left: 5%;
+    /* margin-left: 5%; */
     margin-top: 5px;
 }
 section {
@@ -13,4 +13,67 @@ section {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
+}
+.box {
+    /* border: 1px solid black; */
+    width: 90%;
+    display: flex;
+
+}
+.box1,.box2,.fbox {
+    height: 20px;
+    width: 15px;
+}
+.box1{
+    background-color: rgba(69, 158, 64, 0.696);
+}
+.box2{
+    background-color: rgba(251, 18, 18, 0.887);
+}
+.cat {
+    display: flex;
+    /* border: 1px solid black; */
+}
+
+.bold-div {
+    /* border: 1px solid black; */
+    width: 40%;
+    display: flex;
+}
+
+.long-rectangle {
+    /* border: 1px solid red; */
+    width: 80%;
+    height: 20px;
+    background-color: rgba(69, 158, 64, 0.696);
+}
+.shorter-rectangle {
+    /* border: 1px solid blue; */
+    width: 50%;
+    height: inherit;
+    background-color: rgba(251, 18, 18, 0.887);
+}
+
+#in {
+    height: 20px;
+    width: 100%;
+    /* background-color: aqua; */
+    display: flex;
+    gap: 0;
+}
+#in div{
+    height: inherit;
+}
+
+#bal, .fbox1 {
+    background-color: rgba(113, 228, 107, 0.696);
+}
+#sav, .fbox2 {
+    background-color: rgba(17, 110, 13, 0.696);
+}
+#ex, .fbox3 {
+    background-color: rgb(255, 10, 10);
+}
+#totalIn {
+    border: 2px solid black;
 }

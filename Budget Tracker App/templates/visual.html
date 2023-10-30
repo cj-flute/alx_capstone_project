@@ -5,29 +5,62 @@
 
 
 {% block content %}
-    <section id="section-expense">
-        <div class="total-expenditure-div">
-            <h1>Expense: $<span id="total-expenditure">0</span></h1>
-        </div>
-    </section>
-    <section id="section-income">
-        <div class="total-income-div">
-            <h1>Income: $<span id="total-incomes">0</span></h1>
-        </div>
-    </section>
-    <section id="section-savings">
-        <div class="total-saving-div">
-            <h1>Savings: $<span id="total-savings">0</span></h1>
-        </div>
-        <!-- <div class="savings">
-            <div class="savings">
-                <b id="the-saving">[Saving]</b><b>: $</b><b id="the-saving-amt">[Amt]</b>
-            </div>
-            <div class="savings">
-                <b id="the-saving">[Saving]</b><b>: $</b><b id="the-saving-amt">[Amt]</b>
-            </div>
-        </div> -->
-    </section>
+<section id="section-expense">
+    <div class="total-expenditure-div">
+        <h1>Expense: $<span id="total-expenditure">0</span></h1>
+    </div>
+    <!-- <div class="long-rectangle">
+        <div class="shorter-rectangle"></div>
+    </div> -->
+    <div class="box">
+        <div class="box1"></div>
+        <b>Total Expenses</b>
+        <div class="box2"></div>
+        <b>The Expense</b>
+    </div>
+</section>
+<section id="section-income">
+    <div class="total-income-div">
+        <h1>Income: $<span id="total-incomes">0</span></h1>
+    </div>
+    <div class="box">
+        <div class="box1"></div>
+        <b>Total Income</b>
+        <div class="box2"></div>
+        <b>Each Income</b>
+    </div>
+</section>
+<section id="section-savings">
+    <div class="total-saving-div">
+        <h1>Savings: $<span id="total-savings">0</span></h1>
+    </div>
+    <div class="box">
+        <div class="box1"></div>
+        <b>Total Income</b>
+        <div class="box2"></div>
+        <b>The Savings</b>
+    </div>
+</section>
+<section id="section-balance">
+    <div class="total-balance-div">
+        <h1>Balance: $<span id="total-balance">0</span></h1>
+    </div>
+    <div class="box">
+        <div class="fbox fbox1"></div>
+        <b>The Balance</b>
+        <div class="fbox fbox2"></div>
+        <b>The Savings</b>
+        <div class="fbox fbox3"></div>
+        <b>The Expense</b>
+    </div>
+    <div id="in">
+        <div id="bal"></div>
+        <div id="sav"></div>
+        <div id="ex"></div>
+    </div>
+    <div id="totalIn"></div>
+    <b>Total Income</b>
+</section>
 
 {% endblock %}
 {% block script %}

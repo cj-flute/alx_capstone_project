@@ -1,15 +1,18 @@
 // Visualisation Creation of elements
-const createCategoryVisualList = (category) => {
+const createCategoryVisualList = (category, money) => {
     const categoryDiv = document.createElement("div");
     categoryDiv.setAttribute("class", "categories");
-    // categoryDiv.setAttribute("id", "category-div");
 
     const theCategories = document.createElement("div");
-    theCategories.setAttribute("class", "categories");
-    // theCategories.setAttribute("id", "the-categories");
+    theCategories.setAttribute("class", "cat");
+
+    const bdiv = document.createElement("div");
+    bdiv.setAttribute("class", "bold-div");
+    theCategories.appendChild(bdiv);
     
     const theCategory = document.createElement("b");
     theCategory.setAttribute("class", "the-category");
+    bdiv.appendChild(theCategory)
     
     const categorySpan = document.createElement("span");
     categorySpan.setAttribute("id", "category");
@@ -22,11 +25,22 @@ const createCategoryVisualList = (category) => {
     const theCategoryAmt = document.createElement("span");
     theCategoryAmt.setAttribute("id", "the-category-amt");
     theCategoryAmt.innerText = category.category_amount;
+
+    const outerBar = document.createElement("div")
+    outerBar.setAttribute("class", "long-rectangle");
+    outerBar.style.width = `100%`;
+    console.log(money);
+
+    const innerBar = document.createElement("div");
+    innerBar.setAttribute("class", "shorter-rectangle");
+    innerBar.style.width = `${(category.category_amount / money) * 100}%`;
+    outerBar.appendChild(innerBar);
+    theCategories.appendChild(outerBar);
+
     
     theCategory.appendChild(categorySpan);
     theCategory.appendChild(categoryColonDollar);
     theCategory.appendChild(theCategoryAmt);
-    theCategories.appendChild(theCategory);
     categoryDiv.appendChild(theCategories);
     
     return categoryDiv;
@@ -40,9 +54,6 @@ const renderVisualCreateList = (div, createFunc) => {
     div.appendChild(item);
 }
 
-
-document.addEventListener('DOMContentLoaded', () => {
-});
 // Expense
 let expense = [];
 const storedExpense = localStorage.getItem('expense');
@@ -55,10 +66,17 @@ if (storedExpense) {
     }
 }
 let tExpense = 0;
-for (let i = 0; i < expense.length; i++){
-    tExpense = tExpense + expense[i].category_amount;
-    console.log(`Expense ${i + 1}:${expense[i].category_name} = ${expense[i].category_amount}`);
-    renderVisualCreateList(sectionExpense, createCategoryVisualList(expense[i]));
+let tExMoney = 0;
+for (let k = 1; k <= expense.length; k++){
+    tExMoney += expense[k-1].category_amount;
+    if (k === expense.length) {
+        for (let i = 0; i < expense.length; i++){
+            tExpense = tExpense + expense[i].category_amount;
+            console.log(`Expense ${i + 1}:${expense[i].category_name} = ${expense[i].category_amount}`);
+            renderVisualCreateList(sectionExpense, createCategoryVisualList(expense[i],tExMoney));
+        }
+
+    }
 }
 
 const totalExpenditure = document.querySelector("#total-expenditure");
@@ -76,10 +94,16 @@ if (storedIncome) {
     }
 }
 let tIncome = 0;
-for (let i = 0; i < income.length; i++){
-    tIncome = tIncome + income[i].category_amount;
-    console.log(`Income ${i + 1}:${income[i].category_name} = ${income[i].category_amount}`);
-    renderVisualCreateList(sectionIncome, createCategoryVisualList(income[i]));
+let tInMoney = 0;
+for (let k = 1; k <= income.length; k++){
+    tInMoney += income[k - 1].category_amount;    
+    if (k === income.length) {
+        for (let i = 0; i < income.length; i++){
+            tIncome = tIncome + income[i].category_amount;
+            console.log(`Income ${i + 1}:${income[i].category_name} = ${income[i].category_amount}`);
+            renderVisualCreateList(sectionIncome, createCategoryVisualList(income[i], tInMoney));
+        }
+    }
 }
 document.querySelector("#total-incomes").innerHTML = tIncome;
 
@@ -95,14 +119,23 @@ if (storedSavings) {
     }
 }
 let tSavings = 0;
-for (let i = 0; i < income.length; i++) {
+for (let i = 0; i < savings.length; i++) {
     if (savings[i] && savings[i].category_amount !== undefined) {
         tSavings += savings[i].category_amount;
         console.log(`Savings ${i + 1}: ${savings[i].category_name} = ${savings[i].category_amount}`);
-        renderVisualCreateList(sectionSavings, createCategoryVisualList(savings[i]));
-
-        // tSavings = tSavings + savings[i].category_amount;
-        // console.log(`Savings ${i + 1}:${savings[i].category_name} = ${savings[i].category_amount}`);
+        renderVisualCreateList(sectionSavings, createCategoryVisualList(savings[i], tInMoney));
     }
-    document.querySelector("#total-savings").innerText = tSavings;
 }
+document.querySelector("#total-savings").innerText = tSavings;
+
+// Balance
+let balance = tIncome - tExpense - tSavings;
+document.querySelector("#total-balance").innerHTML = balance;
+const tinc = document.querySelector("#in");
+const tbal = document.querySelector("#bal");
+const tsav = document.querySelector("#sav");
+const tex = document.querySelector("#ex"); 
+
+tbal.style.width = `${(balance / tIncome) * 100}%`;
+tsav.style.width = `${(tSavings / tIncome) * 100}%`;
+tex.style.width = `${(tExpense / tIncome) * 100}%`;

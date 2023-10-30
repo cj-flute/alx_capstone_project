@@ -60,7 +60,6 @@ exAddBtn?.addEventListener('click', () => {
     // Add or Edit condition for expense
     if (currentbtn === "Edit") {
         // edit
-        console.log("in");
         expense[currentIndex] = exData;
         exAddBtn.innerHTML = "ok";
         currentIndex = -1;
@@ -125,9 +124,12 @@ const createExpenseCard = (expenseData, index) => {
     const btnEdit = document.createElement("button");
     btnEdit.setAttribute("id", "btn-edit");
     btnEdit.textContent = "Edit";
-    
     // Edit functionality in the card creation for expense
     btnEdit.addEventListener('click', () => {
+        if (totalIncome < parseInt(budgetAmt.value)) {
+            document.querySelector("#expense-warning").style.display = "block";
+            return;
+        }
         setData(budgetName,
             budgetAmt,
             expense[index],
