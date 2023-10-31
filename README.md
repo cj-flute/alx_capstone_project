@@ -80,11 +80,7 @@ Delete Savings
 Visualization:
 A page responsible for visual representation was done and it gives the visual representation of your budget.
 ![19 Home page with the budget done](https://github.com/cj-flute/alx_capstone_project/assets/55343677/7545650a-ac4f-4f64-a3aa-487cb1c762d4)
-![20 A visualisation of the budget done in the home page](https://github.com/cj-flute/alx_capstone_project/assets/55343677/f7bf80c2-237c-4fdc-8108-e588090c351f)
-
-
-
-
+![20 A visualization of the budget done on the home page](https://github.com/cj-flute/alx_capstone_project/assets/55343677/f7bf80c2-237c-4fdc-8108-e588090c351f)
 
 
 Roadmap and future enhancements:
