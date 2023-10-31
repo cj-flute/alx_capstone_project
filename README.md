@@ -11,23 +11,28 @@ Features and Functionality:
 
     i. Expense:
 
-         a. Add Budget
-         b. Remove Budget
+         a. Add Expense
+         b. Edit Expense
+         c. Delete Expense
 
     ii. Income:
 
-         a. Add Budget
-         b. Remove Budget
+         a. Add Income
+         b. Edit Income
+         c. Delete income
 
-2.  Add to categories
-3.  Set usage target (Add Expected Expence)
-4.  Settings
+    iii. Savings:
+         a. Add Saving
+         b. Edit Saving
+         c. Delete Saving
+
+2.  Show balance
 
 Technologies Used:
 
 HTML and CSS for front end
 JavaScript for interaction and logic
-Python for back end (Flask)
+Python for routine (Flask)
 
 Screenshots or Demo:
 
@@ -41,4 +46,4 @@ Name: Chijioke Michael Ezembadiwe
 contact: +2347066182125
 email: chijiokeezembadiwe@gmail.com
 X account: @cjflute
-Linkedin:
+Linkedin:https://www.linkedin.com/in/chijioke-ezembadiwe
