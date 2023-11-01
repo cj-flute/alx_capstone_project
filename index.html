@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HOME</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Expense-add-div -->
+    <div class="add-div" id="expense-add-div">
+        <div class="add">
+            <h2>Expense</h2>
+            <input type="text" placeholder="Budget Name" id="budget-name"><br>
+            <input type="number" placeholder="Amount" id="budget-amount"><br>
+            <button class="add-btn" id="ex-add-btn" value="ok">OK</button>
+            <div class="cancel" id="ex-cancel">❌</div>
+            <p id="expense-warning" style="color: red; display: none;">Sorry, You can't make the expense your income can't handle.</p>
+
+        </div>
+    </div>
+    <!-- Income-add-div -->
+    <div class="add-div" id="income-add-div">
+        <div class="add">
+            <h2>Income</h2>
+            <input type="text" placeholder="Income Name" id="income-name"><br>
+            <input type="number" placeholder="Amount" id="income-amount"><br>
+            <button class="add-btn" id="in-add-btn" value="ok">OK</button>
+            <div class="cancel" id="in-cancel">❌</div>
+
+        </div>
+    </div>
+
+    <!-- Save-add-div -->
+    <div class="add-div" id="save-add-div">
+        <div class="add">
+            <h2>Save</h2>
+            <input type="text" placeholder="Savings Name" id="save-name"><br>
+            <input type="number" placeholder="Amount" id="save-amount"><br>
+            <button class="add-btn" id="save-add-btn" value="ok">OK</button>
+            <div class="cancel" id="save-cancel">❌</div>
+            <p id="savings-warning" style="color: red; display: none;">Sorry, You can't save. Make up your income.</p>
+        </div>
+    </div>
+
+    <!-- main index -->
+    <main>
+        <h1>Budget Tracker App</h1>
+        <div id="app-div">
+            <!-- Income div-->
+            <div class="income-div">
+                <div class="in-top">
+                    <div class="card-btn-div">
+                        <button class="btn" id="in-ok-btn">+</button>
+                    </div>
+                    <div class="in-div">
+                        <h2>Income:</h2>
+                        <h2><span>$</span><span id="total-in">0</span></h2>
+                    </div>
+                </div>
+                <div class="in-div-2">
+                    <section class="income-budget-div"></section></div>
+            </div>
+            <!-- Expense div -->
+            <div class="expense-div">
+                <div class="ex-top">
+                    <div class="card-btn-div">
+                        <button class="btn" id="ex-ok-btn">+</button>
+                    </div>
+                    <div class="ex-div">
+                        <h2>Expense:</h2>
+                        <h2><span>$</span><span id="total-ex">0</span></h2>
+                    </div>
+                </div>
+                <div class="ex-div-2">
+                    <section class="expense-budget-div"></section>
+                </div>
+            </div>
+
+            <div class="saving-div">
+                <div class="save-top">
+                    <div class="card-btn-div">
+                        <button class="btn" id="save-ok-btn">+</button>
+                    </div>
+                    <div class="save-div">
+                        <h2>Saving:</h2>
+                        <h2><span>$</span><span id="total-save">0</span></h2>
+                    </div>
+                </div>
+                <div class="save-div-2">
+                    <section class="save-budget-div"></section>
+                </div>
+            </div>
+        </div>
+        <div class="balance-div">
+            <div>
+                <h3 class="bl">Balance:</h3>
+                <h3 class="bl">$<span id="balance"></span></h3>
+            </div>
+        </div>
+
+        <div class="nav-div">
+            <nav>
+                <ol class="links">
+                    <a href="http://127.0.0.1:5000/home" id="home">Home</a>
+                    <a href="http://127.0.0.1:5000/visual" id="visual">Visualize</a>
+                </ol>
+            </nav>
+        </div>
+    </main>
+
+    <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>
